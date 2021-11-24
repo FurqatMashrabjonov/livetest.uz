@@ -1,0 +1,92 @@
+<?php
+// Include the function file
+include 'functions.php';
+// Connect to MySQL
+$conn = pdo_connect_mysql();
+
+$polls = [];
+$query = 'SELECT p.*, GROUP_CONCAT(pa.title ORDER BY pa.id) AS answers FROM polls p LEFT JOIN poll_answers pa ON pa.poll_id = p.id GROUP BY p.id';
+
+$result = $conn->query($query);
+if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        array_push($polls, $row);
+    }
+}
+// MySQL query that retrieves all the polls and poll answers
+//$stmt = $pdo->query('SELECT p.*, GROUP_CONCAT(pa.title ORDER BY pa.id) AS answers FROM polls p LEFT JOIN poll_answers pa ON pa.poll_id = p.id GROUP BY p.id');
+//$polls = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<?=template_header('Polls')?>
+
+<div class="content home">
+	<h2>Polls</h2>
+	<p>Welcome to the home page! You can view the list of polls below.</p>
+	<a href="create.php" class="create-poll">Create Poll</a>
+	<table>
+        <thead>
+            <tr>
+                <td>#</td>
+                <td>Title</td>
+				<td>Answers</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($polls as $poll): ?>
+            <tr>
+                <td><?=$poll['id']?></td>
+                <td><?=$poll['title']?></td>
+				<td><?=$poll['answers']?></td>
+                <td class="actions">
+					<a href="vote.php?id=<?=$poll['id']?>" class="view" title="View Poll"><i class="fas fa-eye fa-xs"></i></a>
+                    <a href="delete.php?id=<?=$poll['id']?>" class="trash" title="Delete Poll"><i class="fas fa-trash fa-xs"></i></a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<?=template_footer()?>
+
+
+
+
+
+
+
+
+
+
+<?php
+function pdo_connect_mysql()
+{
+    // Update the details below with your MySQL details
+    $DATABASE_HOST = 'localhost';
+    $DATABASE_USER = 'u1382474_poll';
+    $DATABASE_PASS = 'G4{{I(fd(Ho(';
+    $DATABASE_NAME = 'u1382474_poll';
+
+
+    $conn = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
+// Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }else {
+       return $conn;
+    }
+//    echo "Connected successfully";
+
+
+//    try {
+//    	return new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASS);
+//    } catch (PDOException $exception) {
+//    	// If there is an error with the connection, stop cthe script and display the error.
+//    	exit('Failed to connect to database!');
+//    }
+}
+
+?>
