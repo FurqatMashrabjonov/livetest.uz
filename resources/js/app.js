@@ -24,6 +24,7 @@ Vue.component('start', require('./components/StartComponent.vue').default);
 Vue.component('test', require('./components/Test.vue').default);
 Vue.component('test-admin', require('./components/TestAdmin.vue').default);
 Vue.component('test-create', require('./components/TestCreate.vue').default);
+Vue.component('test-details-create', require('./components/TestDetailsCreate.vue').default);
 import Vueditor from 'vueditor'
 
 import 'vueditor/dist/style/vueditor.min.css'
@@ -31,22 +32,30 @@ import 'vueditor/dist/style/vueditor.min.css'
 // your config here
 let config = {
     toolbar: [
-        'removeFormat', 'undo', '|', 'elements', 'fontName', 'fontSize', 'foreColor', 'backColor', 'divider',
+         'elements', 'fontName', 'fontSize', 'foreColor', 'backColor', 'divider',
         'bold', 'italic', 'underline', 'strikeThrough', 'links', 'divider', 'subscript', 'superscript',
         'divider', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', '|', 'indent', 'outdent',
-        'insertOrderedList', 'insertUnorderedList', '|', 'picture', 'tables', '|', 'switchView'
+        'insertOrderedList', 'insertUnorderedList'
     ],
     fontName: [
         {val: 'arial black'},
         {val: 'times new roman'},
-        {val: 'Courier New'}
+        {val: 'Courier New'},
+        {val: 'Courier'},
+        {val: 'FreeMono'},
+        {val: 'Comic Sans'},
+        {val: 'Apple Chancery'},
+        {val: 'Impact'},
+        {val: 'Optima'},
+        {val: 'Didot'},
     ],
     fontSize: [
-        '12px', '14px', '16px', '18px', '20px', '24px', '28px', '32px', '36px'
+        '12px', '14px', '16px'
     ],
     uploadUrl: '',
     id: '',
-    classList: []
+    classList: [],
+    placeholder: 'Type here'
 };
 
 Vue.use(Vueditor, config);

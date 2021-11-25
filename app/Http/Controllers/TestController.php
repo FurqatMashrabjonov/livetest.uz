@@ -20,6 +20,23 @@ class TestController extends Controller
         //
     }
 
+    public function variants(){
+        $variants = [
+            [
+                'value' => 0,
+                'img' => asset('assets/images/false.png'),
+            ],
+            [
+                'value' => 1,
+                'img' => asset('assets/images/true.png'),
+            ]
+        ];
+        return response()->json([
+            'success' => true,
+            'variants' => $variants
+        ]);
+    }
+
     public function Out(Request $request)
     {
         $test_user = TestUser::query()
@@ -71,18 +88,41 @@ class TestController extends Controller
      */
     public function create()
     {
-        return view('test.admin.create');
+        $variants = [
+            [
+                'id' => Test::TEST_TYPE_TRUE_FALSE,
+                'img' => asset('assets/images/truefalse.png')
+            ],
+            [
+                'id' => Test::TEST_TYPE_FOUR_VARIANTS,
+                'img' => asset('assets/images/fourvariants.png')
+            ]
+        ];
+        return view('test.admin.create', compact('variants'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+
+        if (in_array( (int)$request->type_id, [Test::TEST_TYPE_FOUR_VARIANTS, Test::TEST_TYPE_TRUE_FALSE])){
+            $test = new Test();
+            $test->name = $request->input('name');
+            $test->user_id = auth()->user()->getAuthIdentifier();
+            $test->type_id = $request->input('type_id');
+            $res = $test->save();
+
+            return response()->json([
+                'success' => true,
+                'test' => $test
+            ]);
+        }
+
     }
 
     /**

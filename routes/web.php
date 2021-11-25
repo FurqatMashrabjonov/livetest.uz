@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\Started;
+use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Models\Test;
 
@@ -48,7 +49,13 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::post('/out', [TestController::class, 'Out']);
     Route::get('/enter/{id}', [TestController::class, 'show']);
     Route::get('/create', [TestController::class, 'create']);
+    Route::post('/store', [TestController::class, 'store']);
+    Route::get('/variants', [TestController::class, 'variants']);
 //    Route::post()
+});
+
+Route::group(['prefix' => 'question', 'middleware' => 'auth'], function () {
+    Route::post('/', [QuestionController::class, 'store']);
 });
 
 Route::get('/avatar', function () {

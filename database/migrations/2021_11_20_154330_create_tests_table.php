@@ -17,6 +17,7 @@ class CreateTestsTable extends Migration
             $table->id();
             $table->unsignedInteger('user_id');
             $table->text('name');
+            $table->unsignedTinyInteger('type_id');
             $table->timestamps();
         });
     }

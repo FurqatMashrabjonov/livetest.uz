@@ -31,11 +31,20 @@ class QuestionController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        //
+        $question = new Question();
+        $question->test_id = $request->test_id;
+        $question->description = $request->description;
+        $question->value = $request->value;
+        $question->save();
+
+        return response()->json([
+            'success' => true,
+            'data' => $question
+        ]);
     }
 
     /**

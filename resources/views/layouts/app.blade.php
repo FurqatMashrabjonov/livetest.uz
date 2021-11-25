@@ -67,7 +67,7 @@
                             </li>
                         @endguest
 
-                        <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium" href="">Create Test</a></li>
+                        <li class="nav-item px-3 px-xl-4"><a class="btn btn-outline-dark order-1 order-lg-0 fw-medium" href="{{url('/test/create')}}">Create Test</a></li>
 
                     </ul>
                 </div>
