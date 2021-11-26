@@ -51,6 +51,7 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::get('/create', [TestController::class, 'create']);
     Route::post('/store', [TestController::class, 'store']);
     Route::get('/variants', [TestController::class, 'variants']);
+    Route::get('/get_test_with_details/{id}', [TestController::class, 'getTestWithDetails']);
 //    Route::post()
 });
 

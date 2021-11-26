@@ -20,7 +20,18 @@ class TestController extends Controller
         //
     }
 
-    public function variants(){
+    public function getTestWithDetails($id)
+    {
+        $test = Test::query()->where('id', $id)->with(['questions'])->first();
+        $variants = [
+            '0' => asset('assets/images/false.png'),
+            '1' => asset('assets/images/true.png'),
+        ];
+        return view('test.admin.preview', ['test' => $test, 'variants' => $variants]);
+    }
+
+    public function variants()
+    {
         $variants = [
             [
                 'value' => 0,
@@ -110,7 +121,7 @@ class TestController extends Controller
     public function store(Request $request)
     {
 
-        if (in_array( (int)$request->type_id, [Test::TEST_TYPE_FOUR_VARIANTS, Test::TEST_TYPE_TRUE_FALSE])){
+        if (in_array((int)$request->type_id, [Test::TEST_TYPE_FOUR_VARIANTS, Test::TEST_TYPE_TRUE_FALSE])) {
             $test = new Test();
             $test->name = $request->input('name');
             $test->user_id = auth()->user()->getAuthIdentifier();

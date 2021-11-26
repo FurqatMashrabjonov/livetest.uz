@@ -36,7 +36,7 @@
         </div>
     </div>
     <div v-else>
-    <test-details-create :test="test"></test-details-create>
+        <test-details-create :test="test"></test-details-create>
     </div>
 </template>
 
@@ -55,6 +55,12 @@ export default {
         }
     },
     created() {
+        this.test = localStorage.getItem('test') ?
+            JSON.parse(localStorage.getItem('test')) :
+            {
+                name: '',
+                type_id: null,
+            }
         console.log(this.variants)
     },
     methods: {
@@ -63,12 +69,18 @@ export default {
         },
         createTest() {
             axios.post('/test/store', this.test)
-            .then(res => {
-                if(res.data.success){
-                    this.test = res.data.test
-                    this.test_created = true
-                }
-            })
+                .then(res => {
+                    if (res.data.success) {
+                        this.test = res.data.test
+                        this.test_created = true
+                    }
+                })
+        }
+    },
+    watch: {
+        test() {
+
+            localStorage.setItem('test', JSON.stringify(this.test))
         }
     }
 }

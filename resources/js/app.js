@@ -25,6 +25,7 @@ Vue.component('test', require('./components/Test.vue').default);
 Vue.component('test-admin', require('./components/TestAdmin.vue').default);
 Vue.component('test-create', require('./components/TestCreate.vue').default);
 Vue.component('test-details-create', require('./components/TestDetailsCreate.vue').default);
+Vue.component('preview-test', require('./components/PreviewTest.vue').default);
 import Vueditor from 'vueditor'
 
 import 'vueditor/dist/style/vueditor.min.css'

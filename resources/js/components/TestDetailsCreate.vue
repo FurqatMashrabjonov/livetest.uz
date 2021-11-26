@@ -66,7 +66,7 @@ export default {
     },
     methods: {
         stopCreating(){
-          alert('Tugadiiiiii')
+          location.href = '/test/get_test_with_details/' + this.test.id
         },
         getQuestion() {
             return this.$refs.question.getContent()
