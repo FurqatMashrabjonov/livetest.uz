@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\Started;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
 use App\Models\Test;
@@ -8,6 +9,7 @@ use App\Models\Test;
 //use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use LasseRafn\InitialAvatarGenerator\InitialAvatar;
 
 /*
@@ -54,6 +56,13 @@ Route::group(['prefix' => 'test', 'middleware' => 'auth'], function () {
     Route::get('/get_test_with_details/{id}', [TestController::class, 'getTestWithDetails']);
 //    Route::post()
 });
+
+
+Route::get('/auth/{driver}/redirect', function ($driver) {
+    return Socialite::driver($driver)->redirect();
+});
+Route::get('/auth/{driver}/callback', [LoginController::class, 'LoginWithSocialite']);
+
 
 Route::group(['prefix' => 'question', 'middleware' => 'auth'], function () {
     Route::post('/', [QuestionController::class, 'store']);
