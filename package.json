@@ -39,6 +39,7 @@
         "laravel-echo": "^1.11.3",
         "pusher-js": "^7.0.3",
         "vue-editor-js": "^2.0.2",
+        "vue-wysiwyg": "^1.7.2",
         "vueditor": "^0.3.1"
     }
 }

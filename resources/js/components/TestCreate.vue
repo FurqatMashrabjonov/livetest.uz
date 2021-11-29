@@ -1,34 +1,37 @@
 <template>
     <div v-if="!test_created" class="container">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-8">
+        <div class="row d-flex justify-content-center align-items-center mt-8">
+            <div class="col-lg-6 col-sm-12 col-md-6 border rounded shadow">
+                <br>
                 <div class="card">
-                    <div class="card-header">
-                        <h3>Create Test</h3>
+                    <div style="margin: 0 auto">
+                        <h3 class="display-5">Create Test</h3>
                     </div>
                     <div class="card-body">
                         <form>
 
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" v-model="test.name" id="name" name="name"
+                            <div class="form-group border rounded p-3 shadow-sm">
+                                <label class="display-6" for="name">Name</label>
+                                <input type="text" class="form-control bg-white" v-model="test.name" id="name" name="name"
                                        placeholder="Enter name">
                             </div>
-                            <hr>
                             <br>
-                            <label>Select type of Answers</label>
-                            <div class="form-group" v-for="(variant, index) in variants" :key="index">
-                                <input type="radio" :value="variant.id" :id="index" v-model="test.type_id"
-                                       name="variants"
 
-                                >
-                                <label :for="index">
-                                    <img width="100" :src="variant.img" alt="">
-                                </label>
-
+                            <div class="border shadow-sm rounded p-3">
+                                <label class="display-6">Select type of Answers</label>
+                                <div class="form-group" v-for="(variant, index) in variants" :key="index">
+                                    <label>
+                                        <input type="radio" :value="variant.id" :id="index" v-model="test.type_id"
+                                               name="radio">
+                                        <span v-html="variant.img"></span>
+                                    </label>
+                                </div>
                             </div>
+                            <br>
+                            <button type="button"
+                                    class="btn btn-outline-primary display-4 border rounded float-right"
 
-                            <button type="button" class="btn btn-primary" @click="createTest()">Submit</button>
+                                    @click="createTest()">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -52,6 +55,7 @@ export default {
                 type_id: null,
             },
             test_created: false
+
         }
     },
     created() {
@@ -86,6 +90,70 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+$primary-color: #FFBD86; // Change color here. C'mon, try it!
+$text-color: mix(#000, $primary-color, 64%);
+
+
+label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+    /* Accessible outline */
+    /* Remove comment to use */
+    /*
+        &:focus-within {
+                outline: .125em solid $primary-color;
+        }
+    */
+    input {
+        position: absolute;
+        left: -9999px;
+
+        &:checked + span {
+            background-color: mix(#fff, $primary-color, 84%);
+
+            &:before {
+                box-shadow: inset 0 0 0 0.4375em $primary-color;
+            }
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em; // or something higher...
+        transition: 0.25s ease;
+
+        &:hover {
+            background-color: mix(#fff, $primary-color, 84%);
+        }
+
+        &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #fff;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em $primary-color;
+        }
+    }
+}
+
+// Codepen spesific styling - only to center the elements in the pen preview and viewport
 
 </style>

@@ -10,6 +10,27 @@ use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
+
+
+    public $variants = [
+        [
+            'value' => 0,
+            'img' => '  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+             style="fill: rgba(255, 194, 115, 1);">
+            <path
+                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.207 12.793-1.414 1.414L12 13.414l-2.793 2.793-1.414-1.414L10.586 12 7.793 9.207l1.414-1.414L12 10.586l2.793-2.793 1.414 1.414L13.414 12l2.793 2.793z"></path>
+        </svg>',
+        ],
+        [
+            'value' => 1,
+            'img' => '<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+             style="fill: rgba(255, 194, 115, 1);">
+            <path
+                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path>
+        </svg>',
+        ]
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -23,28 +44,15 @@ class TestController extends Controller
     public function getTestWithDetails($id)
     {
         $test = Test::query()->where('id', $id)->with(['questions'])->first();
-        $variants = [
-            '0' => asset('assets/images/false.png'),
-            '1' => asset('assets/images/true.png'),
-        ];
-        return view('test.admin.preview', ['test' => $test, 'variants' => $variants]);
+        return view('test.admin.preview', ['test' => $test, 'variants' => $this->variants]);
     }
 
     public function variants()
     {
-        $variants = [
-            [
-                'value' => 0,
-                'img' => asset('assets/images/false.png'),
-            ],
-            [
-                'value' => 1,
-                'img' => asset('assets/images/true.png'),
-            ]
-        ];
+
         return response()->json([
             'success' => true,
-            'variants' => $variants
+            'variants' => $this->variants
         ]);
     }
 
@@ -102,11 +110,20 @@ class TestController extends Controller
         $variants = [
             [
                 'id' => Test::TEST_TYPE_TRUE_FALSE,
-                'img' => asset('assets/images/truefalse.png')
+                'img' => '  <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+             style="fill: rgba(255, 194, 115, 1);">
+            <path
+                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.999 14.413-3.713-3.705L7.7 11.292l2.299 2.295 5.294-5.294 1.414 1.414-6.706 6.706z"></path>
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24"
+             style="fill: rgba(255, 194, 115, 1);">
+            <path
+                d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm4.207 12.793-1.414 1.414L12 13.414l-2.793 2.793-1.414-1.414L10.586 12 7.793 9.207l1.414-1.414L12 10.586l2.793-2.793 1.414 1.414L13.414 12l2.793 2.793z"></path>
+        </svg>'
             ],
             [
                 'id' => Test::TEST_TYPE_FOUR_VARIANTS,
-                'img' => asset('assets/images/fourvariants.png')
+                'img' => '<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24" style="fill: rgba(255, 194, 115, 1);;transform: ;msFilter:;"><path d="m3.553 18.895 4 2a1.001 1.001 0 0 0 .894 0L12 19.118l3.553 1.776a.99.99 0 0 0 .894.001l4-2c.339-.17.553-.516.553-.895v-5c0-.379-.214-.725-.553-.895L17 10.382V6c0-.379-.214-.725-.553-.895l-4-2a1 1 0 0 0-.895 0l-4 2C7.214 5.275 7 5.621 7 6v4.382l-3.447 1.724A.998.998 0 0 0 3 13v5c0 .379.214.725.553.895zM8 12.118l2.264 1.132-2.913 1.457-2.264-1.132L8 12.118zm4-2.5 3-1.5v2.264l-3 1.5V9.618zm6.264 3.632-2.882 1.441-2.264-1.132L16 12.118l2.264 1.132zM8 18.882l-.062-.031V16.65L11 15.118v2.264l-3 1.5zm8 0v-2.264l3-1.5v2.264l-3 1.5zM12 5.118l2.264 1.132-2.882 1.441-2.264-1.132L12 5.118z"></path></svg>'
             ]
         ];
         return view('test.admin.create', compact('variants'));

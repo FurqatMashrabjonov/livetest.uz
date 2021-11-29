@@ -1,33 +1,32 @@
 <template>
     <div class="container mb-12">
         <div class="row m-5">
-            <div class="col-6" v-if="!created_question" style="margin: 0 auto">
-                <h1 class="display-4">Question</h1>
-                <Vueditor ref="question"/>
-                <hr>
-                <h1 class="display-4">Answer (Select each one)</h1>
-                <div v-if="test.type_id === 1" class="d-flex">
-                    <div v-for="(variant, index) in variants"
-                         class="m-2" :key="index"
-                         @click="selected_answer = index"
-                         :class="{'border border-primary shadow-xs p-2 mb-1 bg-white rounded' : selected_answer === index}"
-                    >
-
-                        <label :for="index">
-                            <img :src="variant.img"
-                                 width="60" alt="">
-                        </label>
-                        <input type="radio"
-                               :id="index"
-                               class="d-none"
-                               :value="variant.value"
-                               v-model="question.value"
-                               name="variant">
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-outline-primary" @click="storeQuestion">Send</button>
-                    </div>
+            <div class="col-lg-6 col-sm-12 col-md-6 border rounded shadow" v-if="!created_question" style="margin: 0 auto">
+                <div class="border rounded shadow-sm p-3 mt-2">
+                    <h1 class="display-6">Question</h1>
+                    <Vueditor class="border rounded p-2" style="height: 180px" ref="question"></Vueditor>
                 </div>
+                <br>
+               <div class="border shadow-sm rounded p-3">
+                   <h1 class="display-6">Answer (Select each one)</h1>
+                   <div v-if="test.type_id === 1" class="d-flex">
+                       <div v-for="(variant, index) in variants"
+                            class="m-2" :key="index"
+                            @click="selected_answer = index">
+                           <label>
+                               <input type="radio" :value="variant.value" :id="index" v-model="question.value"
+                                      name="radio">
+                               <span v-html="variant.img"></span>
+                           </label>
+                       </div>
+                   </div>
+               </div>
+                <br>
+
+                    <div class="form-group mb-2">
+                        <button type="button" class="btn btn-outline-primary display-4 border rounded float-right mb-2" @click="storeQuestion">Send</button>
+                    </div>
+
             </div>
             <div class="col-6" v-if="created_question" style="margin: 0 auto">
                <div>
@@ -53,6 +52,7 @@ export default {
     data() {
         return {
             variants: null,
+            myHTML: '',
             question: {
                 value: null,
                 description: null,
@@ -96,6 +96,71 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+
+$primary-color: #FFBD86; // Change color here. C'mon, try it!
+$text-color: mix(#000, $primary-color, 64%);
+
+
+label {
+    display: flex;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 0.375em;
+    /* Accessible outline */
+    /* Remove comment to use */
+    /*
+        &:focus-within {
+                outline: .125em solid $primary-color;
+        }
+    */
+    input {
+        position: absolute;
+        left: -9999px;
+
+        &:checked + span {
+            background-color: mix(#fff, $primary-color, 84%);
+
+            &:before {
+                box-shadow: inset 0 0 0 0.4375em $primary-color;
+            }
+        }
+    }
+
+    span {
+        display: flex;
+        align-items: center;
+        padding: 0.375em 0.75em 0.375em 0.375em;
+        border-radius: 99em; // or something higher...
+        transition: 0.25s ease;
+
+        &:hover {
+            background-color: mix(#fff, $primary-color, 84%);
+        }
+
+        &:before {
+            display: flex;
+            flex-shrink: 0;
+            content: "";
+            background-color: #fff;
+            width: 1.5em;
+            height: 1.5em;
+            border-radius: 50%;
+            margin-right: 0.375em;
+            transition: 0.25s ease;
+            box-shadow: inset 0 0 0 0.125em $primary-color;
+        }
+    }
+}
+
+// Codepen spesific styling - only to center the elements in the pen preview and viewport
 
 </style>
+
