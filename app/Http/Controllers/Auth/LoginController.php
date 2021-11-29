@@ -49,7 +49,7 @@ class LoginController extends Controller
             ->where('email', $user_s->getEmail())->first();
         if ($user) {
             Auth::login($user, true);
-            return redirect()->to('/home');
+            return redirect()->to('/');
         } else {
 
             $response = Http::withHeaders([
@@ -64,7 +64,7 @@ class LoginController extends Controller
                 'avatar' => $response->json()['avatar_svg'],
             ]);
             auth()->login($user, true);
-            return redirect()->to('/home');
+            return redirect()->to('/');
         }
     }
 
