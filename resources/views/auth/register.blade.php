@@ -61,6 +61,15 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check d-flex">
+                                    <a href="{{url('/auth/google/redirect')}}"><img src="{{asset('images/google.png')}}" width="200" alt=""></a>
+                                    <a href="{{url('/auth/github/redirect')}}"><img src="{{asset('images/github.png')}}" width="200" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
