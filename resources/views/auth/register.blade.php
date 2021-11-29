@@ -73,7 +73,7 @@
 
                             <div class="form-group row">
                                 <div class="col-md-6 offset-md-4">
-                                    <div class="form-check d-flex border rounded shadow-sm" style="width: 200px">
+                                    <div class="form-check d-flex" style="width: 200px">
                                         <a href="{{url('/auth/google/redirect')}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
                                                  viewBox="0 0 24 24"
