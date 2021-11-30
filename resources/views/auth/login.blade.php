@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-8">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 col-lg-6 col-sm-12 border shadow rounded">
                 <div class="card">
-                    <div class="card-header">{{ __('Login') }}</div>
+                    <div class="card-header display-5 bg-white">{{ __('Login') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
@@ -62,7 +62,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check d-flex" style="width: 200px">
                                         <a href="{{url('/auth/google/redirect')}}" >
-                                            <svg class="social" xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                            <svg class="social" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                                  viewBox="0 0 24 24"
                                                  style="fill: rgba(255, 195, 111, 1);transform: ;msFilter:;">
                                                 <path
@@ -70,7 +70,7 @@
                                             </svg>
                                         </a>
                                         <a href="{{url('/auth/github/redirect')}}" class="social">
-                                            <svg class="social" xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                            <svg class="social" xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                                  viewBox="0 0 24 24"
                                                  style="fill: rgba(255, 195, 111, 1);transform: ;msFilter:;">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -83,15 +83,14 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Login') }}
-                                    </button>
-
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
                                             {{ __('Forgot Your Password?') }}
                                         </a>
                                     @endif
+                                    <button type="submit"  class="btn btn-primary border shadow rounded">
+                                        {{ __('Login') }}
+                                    </button>
                                 </div>
                             </div>
                         </form>

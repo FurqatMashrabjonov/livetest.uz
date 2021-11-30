@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container mt-8">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-8 col-lg-6 col-sm-12 border shadow rounded">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <div class="card-header bg-white display-5">{{ __('Register') }}</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
@@ -75,7 +75,7 @@
                                 <div class="col-md-6 offset-md-4">
                                     <div class="form-check d-flex" style="width: 200px">
                                         <a href="{{url('/auth/google/redirect')}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                                  viewBox="0 0 24 24"
                                                  style="fill: rgba(255, 195, 111, 1);transform: ;msFilter:;">
                                                 <path
@@ -83,7 +83,7 @@
                                             </svg>
                                         </a>
                                         <a href="{{url('/auth/github/redirect')}}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50"
                                                  viewBox="0 0 24 24"
                                                  style="fill: rgba(255, 195, 111, 1);transform: ;msFilter:;">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
@@ -96,7 +96,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary border shadow rounded float-right">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
